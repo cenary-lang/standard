@@ -1,3 +1,5 @@
+*Announcement!* We've renamed Ivy into Cenary. Pdf versions of progress reports may refer the language as Ivy.
+
 # Cenary Standard
 
 This repository contains specification of the [Cenary](https://github.com/cenary-lang/cenary) programming language.
