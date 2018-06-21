@@ -1,0 +1,215 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% baposter Landscape Poster
+% LaTeX Template
+% Version 1.0 (11/06/13)
+%
+% baposter Class Created by:
+% Brian Amberg (baposter@brian-amberg.de)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[landscape,a1paper,fontscale=0.485]{baposter} % Adjust the font scale/size here
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{figures/}} % Directory in which figures are stored
+
+\usepackage{amsmath} % For typesetting math
+\usepackage{amssymb} % Adds new symbols to be used in math mode
+
+\usepackage{booktabs} % Top and bottom rules for tables
+\usepackage{enumitem} % Used to reduce itemize/enumerate spacing
+\usepackage{palatino} % Use the Palatino font
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+
+\usepackage{multicol} % Required for multiple columns
+\setlength{\columnsep}{1.5em} % Slightly increase the space between columns
+\setlength{\columnseprule}{0mm} % No horizontal rule between columns
+
+\usepackage{tikz} % Required for flow chart
+\usetikzlibrary{shapes,arrows} % Tikz libraries required for the flow chart in the template
+
+\newcommand{\compresslist}{ % Define a command to reduce spacing within itemize/enumerate environments, this is used right after \begin{itemize} or \begin{enumerate}
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+}
+
+\definecolor{lightblue}{rgb}{0.145,0.6666,1} % Defines the color used for content box headers
+
+\begin{document}
+
+\begin{poster}
+{
+headerborder=closed, % Adds a border around the header of content boxes
+colspacing=1em, % Column spacing
+bgColorOne=white, % Background color for the gradient on the left side of the poster
+bgColorTwo=white, % Background color for the gradient on the right side of the poster
+borderColor=lightblue, % Border color
+headerColorOne=black, % Background color for the header in the content boxes (left side)
+headerColorTwo=lightblue, % Background color for the header in the content boxes (right side)
+headerFontColor=white, % Text color for the header text in the content boxes
+boxColorOne=white, % Background color of the content boxes
+textborder=roundedleft, % Format of the border around content boxes, can be: none, bars, coils, triangles, rectangle, rounded, roundedsmall, roundedright or faded
+eyecatcher=true, % Set to false for ignoring the left logo in the title and move the title left
+headerheight=0.1\textheight, % Height of the header
+headershape=roundedright, % Specify the rounded corner in the content box headers, can be: rectangle, small-rounded, roundedright, roundedleft or rounded
+headerfont=\Large\bf\textsc, % Large, bold and sans serif font in the headers of content boxes
+%textfont={\setlength{\parindent}{1.5em}}, % Uncomment for paragraph indentation
+linewidth=2pt % Width of the border lines around content boxes
+}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+%
+{\includegraphics[height=4em]{Ivy_Logo.png}} % First university/lab logo on the left
+{\bf\textsc{Ivy: A programming language targeting EVM}\vspace{0.5em}} % Poster title
+{ Yigit Ozkavci \\\hspace{12pt} Advisor: Can Ozturan } % Author names and institution
+{\includegraphics[height=4em]{Boun_Logo.png}} % Second university/lab logo on the right
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\headerbox{Introduction}{name=objectives,column=0,row=0}{
+
+Ivy is a programming language designed for Ethereum Virtual Machine. Ivy enables us to write smart contracts and deploy them directly to an Ethereum blockchain.
+
+\vspace{0.3em} % When there are two boxes, some whitespace may need to be added if the one on the right has more content
+}
+
+%----------------------------------------------------------------------------------------
+%	RESULTS 1
+%----------------------------------------------------------------------------------------
+
+\headerbox{Development}{name=architecture,column=2,span=2,row=0}{
+
+\begin{center}
+\includegraphics[width=0.6\linewidth]{Ivysh}
+\captionof{figure}{Ivy.sh}
+\end{center}
+
+Ivy has grown over time and in order to satisfy its needs, we built a compiler program, which can be used to perform several tasks other than just compiling Ivy.\\
+
+Currently Ivy has 13 test scenarios which we perform in real testing network, collect the results and assert to generate a testing report. Every patch to Ivy compiler should satisfy the test requirements and pass all the scenarios.
+}
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\headerbox{References}{name=references,column=0,above=bottom}{
+
+\renewcommand{\section}[2]{\vskip 0.05em} % Get rid of the default "References" section title
+\nocite{*} % Insert publications even if they are not cited in the poster
+\small{ % Reduce the font size in this block
+\bibliographystyle{unsrt}
+\bibliography{sample} % Use sample.bib as the bibliography file
+}}
+
+%----------------------------------------------------------------------------------------
+%	FUTURE RESEARCH
+%----------------------------------------------------------------------------------------
+
+\headerbox{Future Research}{name=futureresearch,column=1,span=2,aligned=references,above=bottom}{ % This block is as tall as the references block
+
+Over the time of 1 year, Ivy has grown into a usable and convenient programming language for writing Ethereum smart contracts. We plan on giving Ivy a position of an IR (Intermediate Representation) to give rise to a pure functional, high level programming language.\\
+
+Ivy currently lacks necessary abstractions for writing safe and efficient smart contracts, but also low-level enough to be used as a base language to compile to, just like LLL\cite{lll}.
+}
+
+%----------------------------------------------------------------------------------------
+%	CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\headerbox{Contact Information}{name=contact,column=3,aligned=references,above=bottom}{ % This block is as tall as the references block
+
+\begin{description}\compresslist
+\item[Web] https://github.com/yigitozkavci
+\item[Email] yigitozkavci8@gmail.com
+\item[Phone] +90 535 084 76 02
+\end{description}
+}
+
+%----------------------------------------------------------------------------------------
+%	RESEARCH
+%----------------------------------------------------------------------------------------
+
+\headerbox{Research}{name=research,column=2,span=2,row=0,below=architecture,above=references}{
+The biggest challenge in this term was to figure out how to represent runtime data structures in the context of EVM. In order to do that, we studied yellowpaper\cite{yellowpaper} on how persistent memory works, and how one handles runtime exceptions.\\
+
+In EVM, exception means halting the execution and returning $0$ as the result of the operation; to debug such cases, we use $LOG0, LOG1, ...$ instructions of the EVM to provide a meaningful message with the contents of a portion of the memory, and lastly a topic to categorise the log message.\\
+
+Firstly, we separated our memory into two spaces: stack and heap. Stack, we know every address on, of which size is determined at compile time. By exploiting lazy evaluation of Haskell, we can use the address where stack ends and heap begins, before even computing it (details on this will be in the report). For heap, we only know where it begins, and everytime we expand heap we update the last address on the heap to help us in allocating future values.\\
+
+We have the convention of storing arrays in the format: {length, first elem, second elem, ...}; this convention helps us while traversing or resizing or accessing a single element of the array.\\
+
+For hashmaps, addressing is a bit different; our hashing function exploits the fact that EVM owns a virtual memory of size $2 ^ {256}$. We use the hashing pattern that also Solidity uses: we concatenate key with the order of the mapping identifier, then take the keccak256 hash of it to compute its address. This operation is done in runtime (otherwise we could not use keys with dynamic types such as arrays) with the instruction $SHA3$.
+}
+
+%----------------------------------------------------------------------------------------
+%	MOTIVATION
+%----------------------------------------------------------------------------------------
+
+\headerbox{Motivation}{name=method,column=0,below=objectives,bottomaligned=research}{ % This block's bottom aligns with the bottom of the research block
+
+Smart contracts are widely accepted concept of transferring values without the existence of a middleman. A smart contract lives in the blockchain like any other entity, and is able to receive \& send valuables, with the decision being made via contract's internal state. \\
+
+Every computation on the smart contracts costs gas, a measure for computational power required by the contract; this makes the content of smart contract even more critical since the efficiency of computation directly affects the costs of executing the contract, in real money.
+\begin{center}
+\includegraphics[width=0.8\linewidth]{Etherum-and-Smart-Contracts}
+\captionof{figure}{Smart Contract}
+\end{center}
+
+Since this is the second term and we continued developing Ivy, which was already a mature programming language, we've made crucial improvements in order to make Ivy more convenient and powerful.
+}
+
+%----------------------------------------------------------------------------------------
+%	RESULTS 2
+%----------------------------------------------------------------------------------------
+
+\headerbox{Language Features}{name=language_features,column=1,bottomaligned=research}{ % This block's bottom aligns with the bottom of the research block
+
+Features Introduced First Term:
+\begin{itemize}
+  \item Primitives: int, char, bool
+  \item Array types: int[], char[], bool[]
+  \item Branching (if-else statements)
+  \item Loops
+  \item Functions
+  \item Arithmetic (+,-,*,/) and comparison (>,==,<) operators
+  \item Type-checking
+  \item Parsing error handling
+  \item Compile-time error handling
+\end{itemize}
+
+Features Introduced Second Term:
+\begin{itemize}
+  \item Persistent contract storage (corresponding to contract variables in Solidity)
+  \item Runtime heap-space arrays
+  \item Hashmaps (can be persistent and temporary) (for security considerations, see \cite{solidity_hashmaps})
+  \item Deployment (to any Ethereum blockchain network)
+  \item Runtime Logging (or events, in Solidity convention)
+  \item Runtime Exceptions (by halting the transaction)
+  \item Syntax support for resizing and allocating dynamic arrays
+\end{itemize}
+\bigbreak
+\begin{center}
+\includegraphics[width=0.8\linewidth]{IvyMemory}
+\captionof{figure}{Ivy Memory Architecture}
+\end{center}
+}
+
+Even though Ivy does not have a module system yet, we are capable of implementing a standard library for Ivy, written in Ivy.
+%----------------------------------------------------------------------------------------
+
+\end{poster}
+
+\end{document}
